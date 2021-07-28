@@ -53,7 +53,7 @@ $(function(){
     $(".load_more button").click(function(){
       $(".featured_item:hidden").slice(0, 3).show();
       if($(".featured_item:hidden").length == 0){
-        $(".load_more").html(`<a href="#">전체보기</a>`);
+        $(".load_more").html(`<input type="hidden">`);
       }
     });
   }
@@ -86,5 +86,37 @@ $(function(){
   }
   
   detailTabs();
+
+  //디테일 페이지 이미지 높이 맞춤
+  function detailFit(){
+    const imgHeight = $(".detail_img_item").outerHeight();
+    const btnsHeight = $(".detail_tab_btns").outerHeight();
   
+    $(".detail_img").height(imgHeight + btnsHeight);
+  }
+
+  $(window).resize(function(){
+    setTimeout(function(){ //리사이즈, 스크롤 이벤트 시 쓰로틀링
+      detailFit();
+    }, 150);   
+  });
+
+  detailFit();
+
+  // $("#price").click(function(e){
+  //   e.preventDefault();
+  //   $(this).toggleClass("on");
+  //   if($(this).hasClass("on")){
+  //     $(this).html('높은가격순 <i class="fa fa-chevron-up"></i>')
+  //     //$(this).text("높은가격순");
+  //     //$(this).find("i").attr('class', 'fa fa-chevron-up');
+
+  //     location.href='/zay/pages/menu_page/shop.php?key=up_price';
+  //   } else {
+  //     $(this).html('낮은가격순 <i class="fa fa-chevron-down"></i>')
+  //     //$(this).text("낮은가격순");
+  //     //$(this).find("i").attr('class', 'fa fa-chevron-down');
+  //     location.href='/zay/pages/menu_page/shop.php?key=down_price';
+  //   }
+  // });
 });
